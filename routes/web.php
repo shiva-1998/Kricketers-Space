@@ -25,8 +25,8 @@ Route::get('/sign-in-otp-verification', [HomeController::class, 'signinotp'])->n
 Route::get('/sign-in', [HomeController::class, 'signin'])->name('sign-in');
 Route::get('/forget-password', [HomeController::class, 'forgetpassword'])->name('forget-password');
 Route::get('/set-new-password', [HomeController::class, 'setnewpassword'])->name('set-new-password');
-Route::get('/team-captain-dashboard', [HomeController::class, 'teamcaptaindashboard'])->name('team-captain-dashboard');
-Route::get('/team-captain-matches', [HomeController::class, 'teamcaptainmatches'])->name('team-captain-matches');
+
+
 
 Route::post('/save-role', [UserController::class, 'saveRole'])->name('user.role');
 Route::post('/user-sign-up', [UserController::class, 'userSignup'])->name('user-signup');
@@ -35,14 +35,17 @@ Route::post('/save-password', [UserController::class, 'savePassword'])->name("us
 Route::post('/save-profile', [UserController::class, 'saveProfile'])->name('user-profile.update');
 Route::post('/save-profile-pic', [UserController::class, 'saveProfilePic'])->name('user-profile.pic');
 Route::post('/save-team', [UserController::class, 'saveTeam'])->name('user.team');
-Route::post('/complete-registration', [UserController::class, 'completeRegistration']);
+
+
+
 
 
 Route::post('/login', [UserController::class, 'login'])->name('user.login.submit');
 
 Route::middleware(['auth', 'verified.email'])->group(function () {
-    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
+    Route::get('/team-captain-dashboard', [UserController::class, 'teamcaptaindashboard'])->name('team-captain-dashboard');
     Route::post('/user-logout', [UserController::class, 'logout'])->name('user.logout.submit');
     Route::get('/tournament/{id}/pay', [HomeController::class, 'pay'])->middleware('auth')->name('tournament.pay');
     Route::post('/verify-payment', [HomeController::class, 'verifyPayment'])->name('payment.verify');
+    Route::get('/team-captain-matches', [HomeController::class, 'teamcaptainmatches'])->name('team-captain-matches');
 });

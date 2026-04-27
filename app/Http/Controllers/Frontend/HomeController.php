@@ -107,10 +107,7 @@ class HomeController extends Controller
       return view('front.user-signin.set-new-password');
    }
 
-public function teamcaptaindashboard()
-{
-   return view('front.team-captain-dashboard.team-captain');
-}
+
 
 public function teamcaptainmatches()
 {

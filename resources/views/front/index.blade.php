@@ -325,7 +325,13 @@
             </div>
 
             <div class="row g-4">
+
                 @foreach ($tournaments as $tournament)
+                    @php
+                        $registeredCount = \App\Models\Payment::where('tournament_id', $tournament->id)
+                            ->where('status', 'success')
+                            ->count();
+                    @endphp
                     <div class="col-lg-4 col-md-6">
                         <div class="tournament-card">
                             <div class="card-inner">
@@ -339,10 +345,14 @@
                                 <div class="tournament-stats d-flex mt-4">
                                     <div class="stat-box"><span>₹{{ $tournament->entry_fee }}</span><small>Entry
                                             Fee</small></div>
-                                    <div class="stat-box"><span>{{ $tournament->formate }}</span><small>Format</small>
+                                    <div class="stat-box">
+                                        <span>{{ strtoupper($tournament->formate) }}</span><small>Format</small>
                                     </div>
-                                    <div class="stat-box border-0"><span>32/40</span><small>Teams</small></div>
+                                    <div class="stat-box border-0">
+                                        <span>{{ $registeredCount }}/{{ $tournament->slots }}</span><small>Teams</small>
+                                    </div>
                                 </div>
+
                                 @auth
                                     @php
                                         $alreadyJoined = \App\Models\Payment::where('player_id', auth()->id())

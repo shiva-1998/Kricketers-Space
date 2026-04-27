@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ReportController;
 
 
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::get('/login', [AuthController::class, 'showLogin'])->name('admin.login');
 
 
 
@@ -23,10 +23,11 @@ Route::middleware('admin')->group(function () {
     Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
     Route::resource('tournaments', TournamentController::class);
     Route::get('/player-info/{id}', [TournamentController::class, 'playerInfo'])->name('player.info');
-    Route::resource('teams', TeamController::class);
+    Route::resource('/teams', TeamController::class);
     Route::resource('players', PlayerController::class);
     Route::resource('matches', MatchController::class);
-    Route::resource('grounds', GroundController::class);
-    Route::get('payments', [PaymentController::class, 'index'])->name('payments.index');
-    Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::resource('/grounds', GroundController::class);
+    Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('/reports/pdf', [ReportController::class, 'downloadPdf'])->name('reports.pdf');
 });
