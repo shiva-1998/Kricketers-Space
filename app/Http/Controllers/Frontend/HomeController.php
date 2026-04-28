@@ -114,6 +114,20 @@ public function teamcaptainmatches()
    return view('front.team-captain-dashboard.matches');
 }
 
+public function teamcaptaintournaments()
+{
+   return view('front.team-captain-dashboard.tournaments');
+}
+
+public function teamcaptainplayers()
+{
+   return view('front.team-captain-dashboard.team-players');
+}
+
+public function teamcaptainprofile()
+{
+   return view('front.team-captain-dashboard.profile');
+}
 
    // ==================================================================================================================================
    public function pay($id)

@@ -276,3 +276,307 @@ h6 {
     position:sticky;top:0;z-index:1020;background: var(--bg2);box-shadow:0 2px 6px rgba(0,0,0,0.07);
 
 }
+
+/* Card Container */
+.tr-card {
+    background-color: #071a21; /* Dark teal from image */
+    border: 1px solid #1a3a44;
+    border-radius: 24px; /* Soft rounded corners */
+    overflow: hidden;
+    height: 100%;
+}
+
+/* Image Wrapper with specific cropping */
+.tr-image-wrapper {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    padding: 10px; /* Inset padding for the image card look */
+}
+
+.tr-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 18px; /* Inner rounded image */
+}
+
+/* Typography */
+.tr-title {
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.tr-date {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.tr-value {
+    color: #00bcd4; /* Brand cyan */
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* Button Variations with Notched Geometry */
+.btn-tr-outline {
+    background: transparent;
+    color: #00bcd4;
+    border: 1px solid #1a3a44;
+    padding: 8px 12px;
+    font-weight: 600;
+    /* clip-path: polygon(0 0, 92% 0, 100% 30%, 100% 100%, 0 100%); */
+    border-radius: 84px;
+    font-family: 'SpaceGrotesk';
+}
+
+.btn-tr-filled {
+    background-color: #00bcd4;
+    color: #000;
+    border: none;
+    padding: 8px 12px;
+    font-weight: 600;
+    /* Matches notched geometry of outlines */
+    /* clip-path: polygon(0 0, 92% 0, 100% 30%, 100% 100%, 0 100%); */
+    border-radius: 84px;
+    font-family: 'SpaceGrotesk';
+}
+
+.btn-tr-outline:hover {
+    background: rgba(0, 188, 212, 0.05);
+    border-color: #00bcd4;
+}
+
+
+/* Typography */
+.dashboard-title {
+    color: var(--p);
+    font-weight: 700;
+    font-size: 1.75rem;
+}
+
+.dashboard-subtitle {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+/* Main Table Card */
+.dashboard-card-wrap {
+    background-color: var(--bg2);
+    border: 1px solid var(--border-color);
+    border-radius: 24px; /* Matches the soft rounded dashboard look */
+    overflow: hidden;
+}
+
+/* Table Design */
+.players-table {
+    --bs-table-bg: transparent;
+    border-collapse: separate;
+}
+
+.players-table thead th {
+    background-color: rgba(0, 0, 0, 0.25);
+    color: #64748b;
+    font-size: 0.8rem;
+    text-transform: capitalize;
+    font-weight: 600;
+    padding: 20px 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.players-table tbody td {
+    color: #ffffff;
+    padding: 18px 15px;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.95rem;
+}
+
+.j-number { color: rgba(255, 255, 255, 0.5); font-weight: 700; }
+
+/* Status & Rating Pill */
+.rating-pill {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+/* Header Button */
+.btn-cyan-pill {
+    background-color: var(--p);
+    color: #000;
+    border: none;
+    border-radius: 25px;
+    font-weight: 700;
+    transition: opacity 0.2s;
+}
+
+/* Footer & Pagination */
+.dashboard-footer {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.page-arrow {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    color: #64748b;
+    font-size: 0.8rem;
+}
+
+.page-arrow.active {
+    border-color: var(--p);
+    color: var(--p);
+}
+
+.page-number {
+    color: #fff;
+    font-weight: 700;
+}
+
+
+/* Color Palette */
+:root {
+    --modal-bg: #0b1e24; /* Deep teal from reference */
+    --input-bg: #071a21;
+    --cyan: #00bcd4;
+    --border: #1a3a44;
+}
+
+.text-cyan { color: var(--cyan); }
+
+/* Modal Container */
+.custom-modal-bg {
+    background-color: var(--modal-bg) !important;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 10px;
+}
+
+/* Custom Form Controls */
+.custom-input {
+    background-color: var(--input-bg) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 30px !important; /* Rounded inputs from image */
+    color: #fff !important;
+    padding: 12px 20px;
+}
+
+.custom-input::placeholder {
+    color: #64748b;
+}
+
+/* Select Dropdown Arrow Color */
+.form-select.custom-input {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+}
+
+/* Upload Box Styling */
+.upload-box {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    background-color: var(--input-bg);
+}
+
+.upload-box label {
+    cursor: pointer;
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* Button Variations */
+.btn-cyan-pill {
+    background-color: var(--cyan);
+    color: #000;
+    border-radius: 30px;
+    font-weight: 700;
+    border: none;
+}
+
+.btn-outline-custom {
+    border: 1px solid var(--border);
+    color: #fff;
+    border-radius: 30px;
+    background: transparent;
+}
+
+.btn-outline-custom:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+
+
+
+
+
+/* Data Points */
+.info-label {
+    color: var(--muted-text-color);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.info-value {
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+/* Avatar and Pills */
+.profile-avatar {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    border: 2px solid var(--border-color);
+}
+
+.status-pill-enabled {
+    background: rgba(0, 255, 136, 0.1);
+    color: var(--accent-color);
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* Buttons */
+.btn-edit-profile {
+    background-color: var(--p);
+    color: #000;
+    font-weight: 700;
+    border-radius: 20px;
+    padding: 8px 24px;
+    border: none;
+}
+
+.btn-delete-account {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 20px;
+    padding: 8px 24px;
+    font-weight: 700;
+}
+
+.border-bottom-teal {
+    border-bottom: 1px solid var(--border-color);
+}
