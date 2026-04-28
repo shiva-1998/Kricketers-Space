@@ -27,7 +27,6 @@
                 <a href="#" class="nav-link "><i class="bi bi-person-circle me-3"></i> Profile</a>
             </nav>
         </aside>
-
         <main class="main-content bg rounded-4 flex-grow-1 p-4">
 
             <h2 class="dashboard-title">Team Dashboard</h2>

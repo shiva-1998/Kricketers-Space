@@ -27,6 +27,10 @@ Route::get('/forget-password', [HomeController::class, 'forgetpassword'])->name(
 Route::get('/set-new-password', [HomeController::class, 'setnewpassword'])->name('set-new-password');
 Route::get('/team-captain-dashboard', [HomeController::class, 'teamcaptaindashboard'])->name('team-captain-dashboard');
 Route::get('/team-captain-matches', [HomeController::class, 'teamcaptainmatches'])->name('team-captain-matches');
+Route::get('/team-captain-tournaments', [HomeController::class, 'teamcaptaintournaments'])->name('team-captain-tournaments');
+Route::get('/team-captain-players', [HomeController::class, 'teamcaptainplayers'])->name('team-captain-players');
+Route::get('/team-captain-profile', [HomeController::class, 'teamcaptainprofile'])->name('team-captain-profile');
+
 
 Route::post('/save-role', [UserController::class, 'saveRole'])->name('user.role');
 Route::post('/user-sign-up', [UserController::class, 'userSignup'])->name('user-signup');
