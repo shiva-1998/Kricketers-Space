@@ -33,7 +33,7 @@
 
         {{-- Dashboard --}}
         <li>
-            <a href="{{route('dashboard')}}">
+            <a href="{{ route('dashboard') }}">
                 <div class="parent-icon"><i class='bx bx-home-circle'></i></div>
                 <div class="menu-title">Overview</div>
             </a>
@@ -49,7 +49,7 @@
 
         {{-- Teams --}}
         <li>
-            <a href="#">
+            <a href="{{ route('teams.index') }}">
                 <div class="parent-icon"><i class='bx bx-group'></i></div>
                 <div class="menu-title">Teams</div>
             </a>
@@ -65,7 +65,7 @@
 
         {{-- Matches --}}
         <li>
-            <a href="#">
+            <a href="{{ route('matches.index') }}">
                 <div class="parent-icon"><i class='bx bx-cricket-ball'></i></div>
                 <div class="menu-title">Matches</div>
             </a>
@@ -73,7 +73,7 @@
 
         {{-- Grounds --}}
         <li>
-            <a href="#">
+            <a href="{{ route('grounds.index') }}">
                 <div class="parent-icon"><i class='bx bx-map'></i></div>
                 <div class="menu-title">Grounds</div>
             </a>
@@ -81,7 +81,7 @@
 
         {{-- Payments --}}
         <li>
-            <a href="#">
+            <a href="{{ route('payments.index') }}">
                 <div class="parent-icon"><i class='bx bx-wallet'></i></div>
                 <div class="menu-title">Payments</div>
             </a>
@@ -89,7 +89,7 @@
 
         {{-- Reports --}}
         <li>
-            <a href="#">
+            <a href="{{ route('reports.index') }}">
                 <div class="parent-icon"><i class='bx bx-bar-chart'></i></div>
                 <div class="menu-title">Reports</div>
             </a>

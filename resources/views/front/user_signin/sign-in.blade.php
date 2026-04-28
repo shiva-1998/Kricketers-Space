@@ -27,29 +27,35 @@
                     <h2 class="reg_from_heading">Welcome Back</h2>
                     <p class="reg_from_subheading">Securely access your account and continue your experience.</p>
 
-                    <form action="{{ route('user.login.submit') }}" method="post" id="signInForm" class="text-start mt-5">
+                    <form action="{{ route('user.login.submit') }}" method="post" id="signInForm"
+                        class="text-start mt-5">
 
                         @csrf
 
                         <div class="mb-4">
                             <label class="form-label text-secondary small ms-2">Enter your work email</label>
                             <div class="custom-input-wrap">
-                                <input type="email" name="email" class="form-control custom-input"
-                                    placeholder="your@company.com  @error('email') is-invalid @enderror" required>
-                                        @error('email')
-            <small class="text-danger">{{ $message }}</small>
-        @enderror
+                                <input type="email" name="email" id="email"
+                                    class="form-control custom-input @error('email') is-invalid @enderror"
+                                    placeholder="your@company.com" required>
+
+                                @error('email')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                                <small id="emailError" class="text-danger"></small>
                             </div>
                         </div>
 
                         <div class="mb-4">
                             <label class="form-label text-secondary small ms-2">Enter your Password</label>
                             <div class="custom-input-wrap">
-                                <input type="password" name="password" class="form-control custom-input @error('password') is-invalid @enderror"
+                                <input type="password" name="password" id="password"
+                                    class="form-control custom-input @error('password') is-invalid @enderror"
                                     placeholder="****************" required>
-                                      @error('password')
-            <small class="text-danger">{{ $message }}</small>
-        @enderror
+                                @error('password')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                                <small id="passwordError" class="text-danger"></small>
                             </div>
                         </div>
 
@@ -69,7 +75,8 @@
 
                         <div class="text-center mt-3">
                             <p class="text-secondary small">
-                                New here? <a href="{{ route('register') }}" class="text-cyan text-decoration-none fw-bold">Continue to
+                                New here? <a href="{{ route('register') }}"
+                                    class="text-cyan text-decoration-none fw-bold">Continue to
                                     create account</a>
                             </p>
                         </div>
@@ -80,3 +87,47 @@
         </div>
     </div>
 </section>
+<script>
+    document.getElementById('signInForm').addEventListener('submit', function(e) {
+
+        let email = document.getElementById('email').value.trim();
+        let password = document.getElementById('password').value.trim();
+
+        let emailError = document.getElementById('emailError');
+        let passwordError = document.getElementById('passwordError');
+
+        let isValid = true;
+
+        // Reset errors
+        emailError.innerText = '';
+        passwordError.innerText = '';
+
+        // Email validation
+        if (email === '') {
+            emailError.innerText = 'Email is required';
+            isValid = false;
+        } else if (!validateEmail(email)) {
+            emailError.innerText = 'Enter valid email address';
+            isValid = false;
+        }
+
+        // Password validation
+        if (password === '') {
+            passwordError.innerText = 'Password is required';
+            isValid = false;
+        } else if (password.length < 6) {
+            passwordError.innerText = 'Password must be at least 6 characters';
+            isValid = false;
+        }
+
+        if (!isValid) {
+            e.preventDefault(); // stop form submit
+        }
+    });
+
+    // Email regex function
+    function validateEmail(email) {
+        let re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+</script>

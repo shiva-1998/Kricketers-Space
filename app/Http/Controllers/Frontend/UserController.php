@@ -189,7 +189,7 @@ class UserController extends Controller
         }
         Auth::login($user);
 
-        return redirect()->route('user.dashboard');
+        return redirect()->route('team-captain-dashboard');
     }
 
     public function logout(Request $request)
@@ -205,14 +205,8 @@ class UserController extends Controller
         return redirect()->route('sign-in')->with('success', 'Logged out successfully');
     }
 
-    public function dashboard()
+    public function teamcaptaindashboard()
     {
-        $user = Auth::user();
-
-        return view('front.user-registrations.dashboard', [
-            'user' => $user,
-            'team' => $user->team_name,
-            'profilePic' => $user->profile_pic,
-        ]);
+        return view('front.team-captain-dashboard.team-captain');
     }
 }

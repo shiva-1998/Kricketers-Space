@@ -9,14 +9,24 @@
 
                 <!-- Top Row -->
                 <div class="d-flex justify-content-between align-items-center mb-2">
+
+                    <!-- Left Side -->
                     <h4 class="fw-bold mb-0">{{ $tournament->name }}</h4>
 
-                    <a href="{{ route('tournaments.index') }}" class="btn text-white btn-sm"
-                        style="background-color:#0b0827;">
-                        <i class="fas fa-arrow-left"></i> Back
-                    </a>
-                </div>
+                    <!-- Right Side Buttons -->
+                    <div class="d-flex gap-2">
+                        <a href="{{ route('matches.index') }}" class="btn text-white btn-sm"
+                            style="background-color:#0b0827;">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </a>
 
+                        <a href="{{ route('matches.create') }}" class="btn text-white btn-sm"
+                            style="background-color:#0b0827;">
+                            <i class="fas fa-plus"></i> Add Match
+                        </a>
+                    </div>
+
+                </div>
                 <!-- Details -->
                 <p class="mb-1"><strong>Type:</strong>
                     @if ($tournament->type == 'team')
@@ -35,7 +45,7 @@
         <!-- Players List -->
         <div class="card">
             <div class="card-header bg-dark text-white">
-                Registered Players
+                Registered Teams
             </div>
             <div class="card-body">
 
@@ -47,7 +57,7 @@
                             <th>Team Name</th>
                             <th>Email</th>
                             <th>Image</th>
-                            <th>Payment ID</th>
+                        
                             <th>Amount</th>
                             <th>Info</th>
                         </tr>
@@ -57,7 +67,7 @@
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>
-                                    @if ($payment->role == 'team_captain')
+                                    @if ($payment->player->role == 'team_captain')
                                         Team Captain
                                     @else
                                         Player
@@ -75,7 +85,7 @@
                                             height="50" style="border-radius:50%;">
                                     @endif
                                 </td>
-                                <td>{{ $payment->razorpay_payment_id }}</td>
+                            
                                 <td>₹{{ $payment->amount }}</td>
                                 <td>
                                     <a href="{{ route('player.info', $payment->player->id) }}" class="btn btn-sm"

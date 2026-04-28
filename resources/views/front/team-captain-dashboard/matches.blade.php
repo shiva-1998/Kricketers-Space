@@ -27,8 +27,8 @@
                 Adjust this top value if your header height changes.
             -->
             <nav class="nav flex-column gap-2">
-                <a href="#" class="nav-link active"><i class="bi bi-grid-fill me-3"></i> Dashboard</a>
-                <a href="#" class="nav-link"><i class="bi bi-trophy me-3"></i> Matches</a>
+                <a href="{{ route('team-captain-dashboard') }}" class="nav-link active"><i class="bi bi-grid-fill me-3"></i> Dashboard</a>
+                <a href="{{ route('team-captain-matches') }}" class="nav-link"><i class="bi bi-trophy me-3"></i> Matches</a>
                 <a href="#" class="nav-link"><i class="bi bi-cup me-3"></i> Tournaments</a>
                 <a href="#" class="nav-link"><i class="bi bi-people me-3"></i> Players</a>
                 <a href="#" class="nav-link"><i class="bi bi-geo-alt me-3"></i> Grounds</a>

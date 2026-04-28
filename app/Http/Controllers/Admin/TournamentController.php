@@ -132,7 +132,7 @@ class TournamentController extends Controller
             ->where('tournament_id', $id)
             ->where('status', 'success') // optional (only paid users)
             ->get();
-
+        // return $tournament;
         return view('back.tournament.show', compact('tournament', 'payments'));
     }
 

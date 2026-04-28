@@ -8,7 +8,7 @@
         <div class="card shadow-sm border-0">
             <div class="card-body">
 
-                <h5 class="fw-bold mb-4">Player Full Details</h5>
+                <h5 class="fw-bold mb-4">Team Full Details</h5>
 
                 <div class="row">
 

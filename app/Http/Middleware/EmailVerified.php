@@ -21,6 +21,6 @@ class EmailVerified
             return $next($request);
         }
 
-        return redirect()->route('login')->with('error', 'Please verify your email.');
+        return redirect()->route('sign-in')->with('error', 'Please verify your email.');
     }
 }
