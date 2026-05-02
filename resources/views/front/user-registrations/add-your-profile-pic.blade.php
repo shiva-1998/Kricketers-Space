@@ -34,30 +34,55 @@
                     <p class="reg_from_subheading">A great photo helps your teammates recognize you on the field.</p>
                     <form action="{{ route('user-profile.pic') }}" method="post" enctype="multipart/form-data">
                         @csrf
+
                         <div class="profile-upload-container mt-5">
+
+                            <!-- Name Field -->
+                            <div class="mb-3">
+                                <label class="form-label text-white">Name</label>
+                                <input type="text" name="name" class="form-control" placeholder="Enter your name"
+                                    value="{{ old('name') }}">
+                                @error('name')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <!-- Phone Number Field -->
+                            <div class="mb-3">
+                                <label class="form-label text-white">Phone Number</label>
+                                <input type="text" name="phone" class="form-control"
+                                    placeholder="Enter your phone number" value="{{ old('phone') }}">
+                                @error('phone')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <!-- Image Upload -->
                             <div class="upload-dropzone p-4 d-flex align-items-center mb-5">
                                 <div class="preview-box me-4">
                                     <img id="profilePreview"
                                         src="{{ asset('assets/frontend/img/player-placeholder.png') }}"
                                         alt="Profile Preview" class="img-fluid rounded-1">
                                 </div>
+
                                 <div class="upload-controls text-start">
-                                    <p class="text-secondary small mb-3">Drag & drop your photo here <br> or click to
-                                        browse
+                                    <p class="text-secondary small mb-3">
+                                        Drag & drop your photo here <br> or click to browse
                                     </p>
+
                                     <label class="cta-secondary-notched mb-0" style="cursor: pointer;">
                                         Upload Photo
                                         <input type="file" id="profileInput" name="profile_pic" accept="image/*"
                                             style="display: none;">
                                     </label>
+
                                     @error('profile_pic')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
-
                                 </div>
                             </div>
 
-                            <button type="submit" class="cta1 w-100  mb-4">Continue</button>
+                            <button type="submit" class="cta1 w-100 mb-4">Continue</button>
 
                             <div class="d-flex align-items-center justify-content-between progress-container">
                                 <div class="custom-progress-bar flex-grow-1 me-3">
@@ -65,6 +90,7 @@
                                 </div>
                                 <span class="text-secondary small">3 <span class="text-muted">/ 4</span></span>
                             </div>
+
                         </div>
                     </form>
                 </div>

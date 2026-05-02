@@ -20,8 +20,7 @@
 
                 <div class="row g-3">
 
-                    <!-- Team A -->
-                    <!-- Team A -->
+                   
                     <div class="col-md-6">
                         <label class="form-label">Team A</label>
                         <select name="team_a_id" class="form-select">

@@ -25,11 +25,8 @@ Route::get('/sign-in-otp-verification', [HomeController::class, 'signinotp'])->n
 Route::get('/sign-in', [HomeController::class, 'signin'])->name('sign-in');
 Route::get('/forget-password', [HomeController::class, 'forgetpassword'])->name('forget-password');
 Route::get('/set-new-password', [HomeController::class, 'setnewpassword'])->name('set-new-password');
-Route::get('/team-captain-dashboard', [HomeController::class, 'teamcaptaindashboard'])->name('team-captain-dashboard');
-Route::get('/team-captain-matches', [HomeController::class, 'teamcaptainmatches'])->name('team-captain-matches');
-Route::get('/team-captain-tournaments', [HomeController::class, 'teamcaptaintournaments'])->name('team-captain-tournaments');
-Route::get('/team-captain-players', [HomeController::class, 'teamcaptainplayers'])->name('team-captain-players');
-Route::get('/team-captain-profile', [HomeController::class, 'teamcaptainprofile'])->name('team-captain-profile');
+
+
 
 
 
@@ -53,4 +50,9 @@ Route::middleware(['auth', 'verified.email'])->group(function () {
     Route::get('/tournament/{id}/pay', [HomeController::class, 'pay'])->middleware('auth')->name('tournament.pay');
     Route::post('/verify-payment', [HomeController::class, 'verifyPayment'])->name('payment.verify');
     Route::get('/team-captain-matches', [HomeController::class, 'teamcaptainmatches'])->name('team-captain-matches');
+    Route::get('/team-captain-tournaments', [HomeController::class, 'teamcaptaintournaments'])->name('team-captain-tournaments');
+    Route::get('/team-captain-players', [UserController::class, 'teamcaptainplayers'])->name('team-captain-players');
+    Route::get('/team-captain-profile', [UserController::class, 'teamcaptainprofile'])->name('team-captain-profile');
+
+    Route::post('/team-player/store', [UserController::class, 'teamStore'])->name('team-player.store');
 });

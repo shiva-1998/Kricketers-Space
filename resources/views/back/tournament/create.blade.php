@@ -4,13 +4,25 @@
     <div class="page-content">
 
         <!-- Header -->
-        <div class="card border-0 shadow-sm mb-3">
-            <div class="card-body">
-                <h5 class="mb-0 fw-bold text-uppercase">Create Tournament</h5>
-                <small class="text-muted">Add new tournament details</small>
+       
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body d-flex justify-content-between align-items-center">
+
+                <!-- Left Content -->
+                <div>
+                    <h5 class="mb-1 fw-bold text-uppercase">Create Tournament</h5>
+                    <small class="text-muted">Add new tournament details</small>
+                </div>
+
+                <!-- Back Button -->
+                <div>
+                    <a href="{{ route('tournaments.index') }}" class="btn btn-secondary">
+                        ← Back
+                    </a>
+                </div>
+
             </div>
         </div>
-
         <!-- Form Card -->
         <div class="card border-0 shadow-sm">
             <div class="card-body">

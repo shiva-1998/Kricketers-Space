@@ -22,6 +22,8 @@ class Player extends Authenticatable
         'profile_pic',
         'team_name',
         'team_logo',
+        'name',
+        'phone'
     ];
 
     protected $hidden = [
@@ -32,4 +34,9 @@ class Player extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function teamPlayers()
+    {
+        return $this->hasMany(TeamPlayer::class, 'player_id', 'id');
+    }
 }

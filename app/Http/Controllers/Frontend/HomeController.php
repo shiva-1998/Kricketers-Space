@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendOtpMail;
-use App\Models\{Tournament, Payment};
+use App\Models\{Tournament, Payment, TeamPlayer, Player, TournamentMatch, Ground};
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Razorpay\Api\Api;
@@ -20,10 +20,49 @@ class HomeController extends Controller
 
    public function index()
    {
-      $tournaments = Tournament::latest()->get();
 
-      // return $tournaments;
-      return view('front.index', compact('tournaments'));
+      $tournamentscount = Tournament::count();
+      $teamcount = TeamPlayer::count();
+      $plyerscount = Player::where('role', 'team_captain')->count();
+      $totalmatches = TournamentMatch::count();
+
+      $tournaments = Tournament::latest()->get();
+      $matches = TournamentMatch::query()
+         ->leftJoin('players as teamA', 'teamA.id', '=', 'matches.team_a_id')
+         ->leftJoin('players as teamB', 'teamB.id', '=', 'matches.team_b_id')
+         ->leftJoin('grounds', 'grounds.id', '=', 'matches.ground_id')
+         ->with(['tournament', 'ground'])
+         ->select(
+            'matches.*',
+            'grounds.name as ground_name',
+
+            // Team A
+            'teamA.id as teamA_id',
+            'teamA.team_name as teamA_name',
+            'teamA.team_logo as teamA_logo',
+
+            // Team B
+            'teamB.id as teamB_id',
+            'teamB.team_name as teamB_name',
+            'teamB.team_logo as teamB_logo'
+         )
+         ->get();
+
+      // return $matches;
+      $teams = Player::where('role', 'team_captain')->withCount('teamPlayers')->get();
+      $grounds = Ground::latest()->get();
+      // return $playerscount;
+      return view('front.index', compact(
+         'tournaments',
+         'grounds',
+         'matches',
+         'teams',
+         'tournamentscount',
+         'plyerscount',
+         'totalmatches',
+         'teamcount',
+         'grounds'
+      ));
    }
 
    public function tournaments()
@@ -109,25 +148,19 @@ class HomeController extends Controller
 
 
 
-public function teamcaptainmatches()
-{
-   return view('front.team-captain-dashboard.matches');
-}
+   public function teamcaptainmatches()
+   {
+      return view('front.team-captain-dashboard.matches');
+   }
 
-public function teamcaptaintournaments()
-{
-   return view('front.team-captain-dashboard.tournaments');
-}
+   public function teamcaptaintournaments()
+   {
+      return view('front.team-captain-dashboard.tournaments');
+   }
 
-public function teamcaptainplayers()
-{
-   return view('front.team-captain-dashboard.team-players');
-}
 
-public function teamcaptainprofile()
-{
-   return view('front.team-captain-dashboard.profile');
-}
+
+
 
    // ==================================================================================================================================
    public function pay($id)
@@ -194,7 +227,7 @@ public function teamcaptainprofile()
          if ($payment) {
             $payment->update([
                'razorpay_payment_id' => $request->razorpay_payment_id,
-               'razorpay_signature' => $request->razorpay_signature, 
+               'razorpay_signature' => $request->razorpay_signature,
                'status' => 'success'
             ]);
          }

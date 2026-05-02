@@ -16,17 +16,7 @@
         </div>
     </header>
     <div class="d-flex">
-        <aside class="sidebar p-3 d-none d-lg-block">
-
-            <nav class="nav flex-column gap-2">
-                <a href="{{ route('team-captain-dashboard') }}" class="nav-link active"><i class="bi bi-grid-fill me-3"></i> Dashboard</a>
-                <a href="{{ route('team-captain-matches') }}" class="nav-link"><i class="bi bi-trophy me-3"></i> Matches</a>
-                <a href="#" class="nav-link"><i class="bi bi-cup me-3"></i> Tournaments</a>
-                <a href="#" class="nav-link"><i class="bi bi-people me-3"></i> Players</a>
-                <a href="#" class="nav-link"><i class="bi bi-geo-alt me-3"></i> Grounds</a>
-                <a href="#" class="nav-link "><i class="bi bi-person-circle me-3"></i> Profile</a>
-            </nav>
-        </aside>
+        @include('front.team-captain-dashboard.side-bar')
         <main class="main-content bg rounded-4 flex-grow-1 p-4">
 
             <h2 class="dashboard-title">Team Dashboard</h2>

@@ -30,4 +30,15 @@ Route::middleware('admin')->group(function () {
     Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
     Route::get('/reports/pdf', [ReportController::class, 'downloadPdf'])->name('reports.pdf');
+
+    Route::post('/matches/{match}/add-ball', [MatchController::class, 'addBall'])
+        ->name('matches.addBall');
+    Route::get('/matches/{id}/view', [MatchController::class, 'view'])->name('matches.view');
+
+    // ✅ RESULT UPDATE
+    Route::post('/matches/{match}/result', [MatchController::class, 'updateResult'])
+        ->name('matches.updateResult');
+
+    Route::post('/matches/{id}/save-toss', [MatchController::class, 'saveToss'])
+        ->name('matches.saveToss');
 });

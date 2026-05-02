@@ -20,21 +20,7 @@
         </div>
     </header>
     <div class="d-flex">
-        <aside class="sidebar p-3 d-none d-lg-block sticky-top" style="top: 281px; z-index: 1019;">
-            <!-- 
-                Added 'sticky-top' class to make the sidebar sticky.
-                The style 'top: 81px;' ensures it doesn't overlap with sticky header.
-                Adjust this top value if your header height changes.
-            -->
-            <nav class="nav flex-column gap-2">
-                <a href="#" class="nav-link active"><i class="bi bi-grid-fill me-3"></i> Dashboard</a>
-                <a href="#" class="nav-link"><i class="bi bi-trophy me-3"></i> Matches</a>
-                <a href="#" class="nav-link"><i class="bi bi-cup me-3"></i> Tournaments</a>
-                <a href="#" class="nav-link"><i class="bi bi-people me-3"></i> Players</a>
-                <a href="#" class="nav-link"><i class="bi bi-geo-alt me-3"></i> Grounds</a>
-                <a href="#" class="nav-link "><i class="bi bi-person-circle me-3"></i> Profile</a>
-            </nav>
-        </aside>
+         @include('front.team-captain-dashboard.side-bar')
    
 
         <main class="main-content bg rounded-4 flex-grow-1 p-4">

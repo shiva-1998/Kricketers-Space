@@ -4,10 +4,22 @@
     <div class="page-content">
 
         <!-- Header -->
-        <div class="card border-0 shadow-sm mb-3">
-            <div class="card-body">
-                <h5 class="mb-0 fw-bold text-uppercase">Edit Tournament</h5>
-                <small class="text-muted">Update tournament details</small>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body d-flex justify-content-between align-items-center">
+
+                <!-- Left Content -->
+                <div>
+                    <h5 class="mb-1 fw-bold text-uppercase">Edit Tournament</h5>
+                    <small class="text-muted">Edit new tournament details</small>
+                </div>
+
+                <!-- Back Button -->
+                <div>
+                    <a href="{{ route('tournaments.index') }}" class="btn btn-secondary">
+                        ← Back
+                    </a>
+                </div>
+
             </div>
         </div>
 
@@ -100,7 +112,7 @@
                             <input type="file" name="logo" class="form-control">
 
                             @if ($tournament->logo)
-                                <img src="{{ asset( $tournament->logo) }}" width="80" class="mt-2">
+                                <img src="{{ asset($tournament->logo) }}" width="80" class="mt-2">
                             @endif
                         </div>
 

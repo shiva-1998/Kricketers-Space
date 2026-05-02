@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendOtpMail;
-use App\Models\Player;
+use App\Models\{Player, TeamPlayer};
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -112,19 +112,34 @@ class UserController extends Controller
 
     public function saveProfilePic(Request $request)
     {
-
         $request->validate([
-            'profile_pic' => 'required|image|mimes:jpg,jpeg,png|max:2048'
+            'profile_pic' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'name' => 'required',
+            'phone' => 'required',
         ]);
+
+        Session::put('registration.name', $request->name);
+        Session::put('registration.phone', $request->phone);
 
         if ($request->hasFile('profile_pic')) {
             $file = $request->file('profile_pic');
-            $fileName = time() . '_profile.' . $file->extension();
+
+            $fileName = uniqid() . '_profile.' . $file->getClientOriginalExtension();
+
             $file->move(public_path('uploads/profile_pic'), $fileName);
+
             Session::put('registration.profile_pic', 'uploads/profile_pic/' . $fileName);
         }
 
-        // dd(Session::get('registration.profile_pic'));
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+
+            $fileName = time() . '_' . $file->getClientOriginalName();
+
+            $file->move(public_path('uploads/team_players'), $fileName);
+
+            Session::put('registration.team_player_photo', 'uploads/team_players/' . $fileName);
+        }
 
         return redirect()->route('createyourteam');
     }
@@ -150,7 +165,7 @@ class UserController extends Controller
 
         // return $data;
 
-        Player::updateOrCreate(
+        $player = Player::updateOrCreate(
             ['email' => $data['email']], // find by email
             [
                 'role' => $data['role'] ?? null,
@@ -159,12 +174,26 @@ class UserController extends Controller
                 'your_role' => $data['your_role'] ?? null,
                 'batting_style' => $data['batting_style'] ?? null,
                 'bowling_type' => $data['bowling_type'] ?? null,
+                'name' => $data['name'] ?? null,
+                'phone' => $data['phone'] ?? null,
                 'profile_pic' => $data['profile_pic'] ?? null,
                 'team_name' => $data['team_name'] ?? null,
                 'team_logo' => $data['team_logo'] ?? null,
             ]
         );
-
+        TeamPlayer::updateOrCreate(
+    [
+        'player_id' => $player->id,
+        'role' => 'captain'
+    ],
+    [
+        'name' => $player->name,
+        'date_of_birth' => $player->date_of_birth ?? null,
+        'phone' => $player->phone,
+        'email' => $player->email,
+        'photo' => $data['team_player_photo'] ?? $player->profile_pic,
+    ]
+);
         Session::forget('registration');
 
         return redirect()->route('allset');
@@ -207,6 +236,62 @@ class UserController extends Controller
 
     public function teamcaptaindashboard()
     {
+
         return view('front.team-captain-dashboard.team-captain');
+    }
+
+
+    public function teamcaptainplayers()
+    {
+        $user = Auth::user();
+
+        $players = TeamPlayer::where('player_id', $user->id)->get();
+
+        return view('front.team-captain-dashboard.team-players', compact('players', 'user'));
+    }
+
+
+    public function teamcaptainprofile()
+    {
+        $user = Auth::user();
+        // return $user;
+        return view('front.team-captain-dashboard.profile', compact('user'));
+    }
+
+
+    public function teamStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|max:255',
+            'date_of_birth' => 'nullable|date',
+            'role' => 'required',
+            'phone' => 'nullable|digits:10',
+            'email' => 'nullable|email',
+            'photo' => 'required|mimes:jpg,jpeg,png,webp,avif|max:2048',
+        ]);
+
+        $fileName = null;
+
+
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/team_players'), $fileName);
+        }
+
+        TeamPlayer::create([
+            'player_id' => auth()->id(),
+            'name' => $request->name,
+            'date_of_birth' => $request->date_of_birth,
+            'role' => $request->role,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'photo' => $fileName,
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Player added successfully'
+        ]);
     }
 }

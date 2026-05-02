@@ -1,6 +1,9 @@
 @include('front.includes.header-links')
 
 @include('front.includes.header')
+<style>
+
+</style>
 
 <main>
 
@@ -43,28 +46,32 @@
                 <div class="col-md-3 counter-item">
                     <p class="counter-label">Active Players</p>
                     <h2 class="counter-number">
-                        <span data-purecounter-start="0" data-purecounter-end="8450" class="purecounter">0</span>+
+                        <span data-purecounter-start="0" data-purecounter-end="{{ $teamcount }}"
+                            class="purecounter">0</span>+
                     </h2>
                 </div>
 
                 <div class="col-md-3 counter-item border-start-custom">
                     <p class="counter-label">Tournaments</p>
                     <h2 class="counter-number">
-                        <span data-purecounter-start="0" data-purecounter-end="42" class="purecounter">0</span>+
+                        <span data-purecounter-start="0" data-purecounter-end="{{ $tournamentscount }}"
+                            class="purecounter">0</span>+
                     </h2>
                 </div>
 
                 <div class="col-md-3 counter-item border-start-custom">
                     <p class="counter-label">Corporates</p>
                     <h2 class="counter-number">
-                        <span data-purecounter-start="0" data-purecounter-end="80" class="purecounter">0</span>+
+                        <span data-purecounter-start="0" data-purecounter-end="{{ $plyerscount }}"
+                            class="purecounter">0</span>+
                     </h2>
                 </div>
 
                 <div class="col-md-3 counter-item border-start-custom">
                     <p class="counter-label">Matches Played</p>
                     <h2 class="counter-number">
-                        <span data-purecounter-start="0" data-purecounter-end="18600" class="purecounter">0</span>+
+                        <span data-purecounter-start="0" data-purecounter-end="{{ $totalmatches }}"
+                            class="purecounter">0</span>+
                     </h2>
                 </div>
             </div>
@@ -84,82 +91,36 @@
             </div>
 
             <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="score-card live-border">
-                        <div class="card-inner">
-                            <div class="card-header-row d-flex justify-content-between">
-                                <span class="status live text-danger"><i class="bi bi-chevron-left"></i> Live</span>
-                                <span class="match-type">T20 | Q/F 2</span>
-                            </div>
+                @foreach ($matches as $data)
+                    <div class="col-lg-4 col-md-6">
+                        <div class="score-card live-border">
+                            <div class="card-inner">
+                                <div class="card-header-row d-flex justify-content-between">
+                                    <span class="status live text-danger"><i class="bi bi-chevron-left"></i> Live</span>
+                                    <span
+                                        class="match-type">{{ ucwords(str_replace('_', ' ', $data->tournament->formate)) }}|
+                                        Q/F 2</span>
+                                </div>
 
-                            <div class="team-row mt-4 d-flex justify-content-between">
-                                <span class="team-name">Google Gladiators</span>
-                                <span class="score">89 <small>/ 2 (10.3)</small></span>
-                            </div>
-                            <div class="team-row mt-3 d-flex justify-content-between">
-                                <span class="team-name">Amazon Avengers</span>
-                                <span class="score">156 <small>/ 5 (20)</small></span>
-                            </div>
+                                <div class="team-row mt-4 d-flex justify-content-between">
+                                    <span class="team-name">{{ $data->team_a_id }}</span>
+                                    <span class="score">89 <small>/ 2 (10.3)</small></span>
+                                </div>
+                                <div class="team-row mt-3 d-flex justify-content-between">
+                                    <span class="team-name">{{ $data->team_b_id }}</span>
+                                    <span class="score">156 <small>/ 5 (20)</small></span>
+                                </div>
 
-                            <hr class="divider mt-4">
-                            <p class="match-insight text-success">Google need 68 runs off 57 balls</p>
-                            <p class="match-location"><i class="bi bi-geo-alt"></i> Chinnaswamy Stadium • IndiaTech Cup
-                                S4</p>
+                                <hr class="divider mt-4">
+                                <p class="match-insight text-success">Google need 68 runs off 57 balls</p>
+                                <p class="match-location"><i class="bi bi-geo-alt"></i>
+                                    {{ $data->tournament->location }}
+                                    Cup
+                                    S4</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="score-card completed-border">
-                        <div class="card-inner">
-                            <div class="card-header-row d-flex justify-content-between">
-                                <span class="status completed text-success"><i class="bi bi-chevron-left"></i>
-                                    Completed</span>
-                                <span class="match-type">T20 • Group Stage</span>
-                            </div>
-
-                            <div class="team-row mt-4 d-flex justify-content-between">
-                                <span class="team-name">Wipro Warriors</span>
-                                <span class="score">187 <small>(20)</small></span>
-                            </div>
-                            <div class="team-row mt-3 d-flex justify-content-between">
-                                <span class="team-name">TCS Tigers</span>
-                                <span class="score">165 <small>(20)</small></span>
-                            </div>
-
-                            <hr class="divider mt-4">
-                            <p class="match-insight text-warning">Wipro Warriors won by 22 runs</p>
-                            <p class="match-location"><i class="bi bi-geo-alt"></i> DY Patil Stadium • Mumbai Corporate
-                                League</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="score-card upcoming-border">
-                        <div class="card-inner">
-                            <div class="card-header-row d-flex justify-content-between">
-                                <span class="status upcoming text-warning"><i class="bi bi-chevron-left"></i>
-                                    Upcoming</span>
-                                <span class="match-type">ODI • Semi-final</span>
-                            </div>
-
-                            <div class="team-row mt-4 d-flex justify-content-between">
-                                <span class="team-name text-secondary">Wipro Warriors</span>
-                                <span class="score">-</span>
-                            </div>
-                            <div class="team-row mt-3 d-flex justify-content-between">
-                                <span class="team-name text-secondary">TCS Tigers</span>
-                                <span class="score">-</span>
-                            </div>
-
-                            <hr class="divider mt-4">
-                            <p class="match-insight text-white">Today • 3:00 PM IST</p>
-                            <p class="match-location"><i class="bi bi-geo-alt"></i> BRSABV Ekana • BengaluruTech Open
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -331,25 +292,55 @@
                         $registeredCount = \App\Models\Payment::where('tournament_id', $tournament->id)
                             ->where('status', 'success')
                             ->count();
+
+                        $today = \Carbon\Carbon::today();
+                        $start = \Carbon\Carbon::parse($tournament->registration_start);
+                        $end = \Carbon\Carbon::parse($tournament->registration_end);
+
+                        if ($today->lt($start)) {
+                            $status = 'Upcoming';
+                            $badgeClass = 'upcoming';
+                        } elseif ($today->between($start, $end)) {
+                            $status = 'Live';
+                            $badgeClass = 'open';
+                        } else {
+                            $status = 'Closed';
+                            $badgeClass = 'closed';
+                        }
                     @endphp
+
                     <div class="col-lg-4 col-md-6">
                         <div class="tournament-card">
                             <div class="card-inner">
+
                                 <div class="d-flex justify-content-between mb-4">
                                     <img src="{{ asset($tournament->logo) }}" alt="League Logo" class="league-icon">
-                                    <span class="status-badge open">Open</span>
+
+                                    <!-- ✅ FIX HERE -->
+                                    <span class="status-badge {{ $badgeClass }}">
+                                        {{ $status }}
+                                    </span>
                                 </div>
+
                                 <h4 class="tournament-name">{{ $tournament->name }}</h4>
-                                <p class="location-text"><i class="bi bi-geo-alt"></i> {{ $tournament->location }}</p>
+                                <p class="location-text">
+                                    <i class="bi bi-geo-alt"></i> {{ $tournament->location }}
+                                </p>
 
                                 <div class="tournament-stats d-flex mt-4">
-                                    <div class="stat-box"><span>₹{{ $tournament->entry_fee }}</span><small>Entry
-                                            Fee</small></div>
                                     <div class="stat-box">
-                                        <span>{{ strtoupper($tournament->formate) }}</span><small>Format</small>
+                                        <span>₹{{ $tournament->entry_fee }}</span>
+                                        <small>Entry Fee</small>
                                     </div>
+
+                                    <div class="stat-box">
+                                        <span>{{ strtoupper($tournament->formate) }}</span>
+                                        <small>Format</small>
+                                    </div>
+
                                     <div class="stat-box border-0">
-                                        <span>{{ $registeredCount }}/{{ $tournament->slots }}</span><small>Teams</small>
+                                        <span>{{ $registeredCount }}/{{ $tournament->slots }}</span>
+                                        <small>Teams</small>
                                     </div>
                                 </div>
 
@@ -365,14 +356,22 @@
                                         <button class="btn btn-secondary w-100 mt-3" disabled>
                                             Already Registered
                                         </button>
-                                    @else
+                                    @elseif ($status == 'Upcoming')
+                                        <button class="btn btn-warning w-100 mt-3" disabled>
+                                            Coming Soon
+                                        </button>
+                                    @elseif ($status == 'Live')
                                         <a href="{{ route('tournament.pay', $tournament->id) }}" class="cta1 w-100 mt-3">
-                                            Register Team
+                                            Register Now
                                         </a>
+                                    @elseif ($status == 'Closed')
+                                        <button class="btn btn-danger w-100 mt-3" disabled>
+                                            Registration Closed
+                                        </button>
                                     @endif
                                 @else
                                     <a href="{{ route('sign-in') }}" class="cta1 w-100 mt-3">
-                                        Register Team
+                                        Register Now
                                     </a>
                                 @endauth
 
@@ -444,14 +443,16 @@
             </div>
 
             <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
+            
+                @foreach ($grounds as $data)
+                      <div class="col-lg-4 col-md-6">
                     <div class="ground-card">
                         <img src="{{ asset('assets/frontend/img/dlff.webp') }}" class="card-img-top"
                             alt="DLF Ground">
                         <div class="card-body">
                             <span class="status-tag available"><i class="bi bi-chevron-left"></i> Available</span>
-                            <h4 class="card-title mt-2">DLF Cricket Ground</h4>
-                            <p class="location-text"><i class="bi bi-geo-alt-fill"></i> DLF Phase 3, Gurugram</p>
+                            <h4 class="card-title mt-2">{{ $data->name }}</h4>
+                            <p class="location-text"><i class="bi bi-geo-alt-fill"></i> {{ $data->location }}, {{ $data->state }}</p>
 
                             <p class="slot-label mt-3">Pick a time slot — Mar 25</p>
                             <div class="time-slots mb-4">
@@ -464,48 +465,8 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="ground-card">
-                        <img src="{{ asset('assets/frontend/img/ambedkar-stadium.webp') }}" class="card-img-top"
-                            alt="Ambedkar Stadium">
-                        <div class="card-body">
-                            <span class="status-tag full"><i class="bi bi-chevron-left"></i> Mostly Full</span>
-                            <h4 class="card-title mt-2">Ambedkar Stadium</h4>
-                            <p class="location-text"><i class="bi bi-geo-alt-fill"></i> ITO, New Delhi</p>
-
-                            <p class="slot-label mt-3">Pick a time slot — Mar 25</p>
-                            <div class="time-slots mb-4">
-                                <span class="slot disabled">1 - 3 PM</span>
-                                <span class="slot disabled">1 - 3 PM</span>
-                                <span class="slot disabled">1 - 3 PM</span>
-                                <span class="slot active">3 - 5 PM</span>
-                            </div>
-                            <button class="btn-confirm cta1 w-100">Confirm Booking</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="ground-card">
-                        <img src="{{ asset('assets/frontend/img/dlf-ground.webp') }}" class="card-img-top"
-                            alt="DLF Ground">
-                        <div class="card-body">
-                            <span class="status-tag available"><i class="bi bi-chevron-left"></i> Available</span>
-                            <h4 class="card-title mt-2">DLF Cricket Ground</h4>
-                            <p class="location-text"><i class="bi bi-geo-alt-fill"></i> DLF Phase 3, Gurugram</p>
-
-                            <p class="slot-label mt-3">Pick a time slot — Mar 25</p>
-                            <div class="time-slots mb-4">
-                                <span class="slot active">9 - 11 AM</span>
-                                <span class="slot active">11 - 1 PM</span>
-                                <span class="slot disabled">1 - 3 PM</span>
-                                <span class="slot active">3 - 5 PM</span>
-                            </div>
-                            <button class="btn-confirm cta1 w-100">Confirm Booking</button>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+            
             </div>
         </div>
     </section>
@@ -522,103 +483,31 @@
             </div>
 
             <div class="row g-4">
-
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="team-card">
-                        <div class="card-inner">
-                            <div class="d-flex justify-content-between align-items-start mb-4">
-                                <img src="{{ asset('assets/frontend/img/chennai.svg') }}" alt="TCS"
-                                    class="team-logo">
-                                <div class="stats-badge">
-                                    <span class="win text-success">W 8</span> — <span class="loss text-danger">L
-                                        2</span>
+                @foreach ($teams as $team)
+                    <div class="col-xl-3 col-lg-4 col-md-6">
+                        <div class="team-card">
+                            <div class="card-inner">
+                                <div class="d-flex justify-content-between align-items-start mb-4">
+                                    <img src="{{ asset($team->team_logo) }}" alt="TCS" class="team-logo">
+                                    <div class="stats-badge">
+                                        <span class="win text-success">W 8</span> — <span class="loss text-danger">L
+                                            2</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <h4 class="team-name">TCS Titans</h4>
-                            <p class="company-text">Tata Consultancy Services</p>
+                                <h4 class="team-name">{{ $team->team_name }}</h4>
+                                {{-- <p class="company-text">Tata Consultancy Services</p> --}}
 
-                            <div class="captain-box mt-4 pt-3 border-top border-secondary">
-                                <label class="text-secondary small">Captain</label>
-                                <h5 class="captain-name">Rohit Sharma</h5>
-                                <p class="text-secondary small">14 registered players</p>
+                                <div class="captain-box mt-4 pt-3 border-top border-secondary">
+                                    <label class="text-secondary small">Captain</label>
+                                    <h5 class="captain-name">{{ $team->name }}</h5>
+                                    <p class="text-secondary small">{{ $team->team_players_count }} registered players
+                                    </p>
+                                </div>
+                                <button class="btn-squad-action w-100 mt-2">View Squad</button>
                             </div>
-                            <button class="btn-squad-action w-100 mt-2">View Squad</button>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="team-card">
-                        <div class="card-inner">
-                            <div class="d-flex justify-content-between align-items-start mb-4">
-                                <img src="{{ asset('assets/frontend/img/rcb.svg') }}" alt="Infosys"
-                                    class="team-logo">
-                                <div class="stats-badge">
-                                    <span class="win text-success">W 7</span> — <span class="loss text-danger">L
-                                        3</span>
-                                </div>
-                            </div>
-                            <h4 class="team-name">Infosys Eagles</h4>
-                            <p class="company-text">Infosys Technologies</p>
-
-                            <div class="captain-box mt-4 pt-3 border-top border-secondary">
-                                <label class="text-secondary small">Captain</label>
-                                <h5 class="captain-name">Ajay Kumar</h5>
-                                <p class="text-secondary small">13 registered players</p>
-                            </div>
-                            <button class="btn-squad-action w-100 mt-2">View Squad</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="team-card">
-                        <div class="card-inner">
-                            <div class="d-flex justify-content-between align-items-start mb-4">
-                                <img src="{{ asset('assets/frontend/img/mi.svg') }}" alt="Wipro"
-                                    class="team-logo">
-                                <div class="stats-badge">
-                                    <span class="win text-success">W 6</span> — <span class="loss text-danger">L
-                                        4</span>
-                                </div>
-                            </div>
-                            <h4 class="team-name">Wipro Waves</h4>
-                            <p class="company-text">Wipro Limited</p>
-
-                            <div class="captain-box mt-4 pt-3 border-top border-secondary">
-                                <label class="text-secondary small">Captain</label>
-                                <h5 class="captain-name">Suresh Menon</h5>
-                                <p class="text-secondary small">15 registered players</p>
-                            </div>
-                            <button class="btn-squad-action w-100 mt-2">View Squad</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="team-card">
-                        <div class="card-inner">
-                            <div class="d-flex justify-content-between align-items-start mb-4">
-                                <img src="{{ asset('assets/frontend/img/srh.svg') }}" alt="Google"
-                                    class="team-logo">
-                                <div class="stats-badge">
-                                    <span class="win text-success">W 9</span> — <span class="loss text-danger">L
-                                        2</span>
-                                </div>
-                            </div>
-                            <h4 class="team-name">Google Knights</h4>
-                            <p class="company-text">Google India Pvt. Ltd.</p>
-
-                            <div class="captain-box mt-4 pt-3 border-top border-secondary">
-                                <label class="text-secondary small">Captain</label>
-                                <h5 class="captain-name">Vikram Menon</h5>
-                                <p class="text-secondary small">14 registered players</p>
-                            </div>
-                            <button class="btn-squad-action w-100 mt-2">View Squad</button>
-                        </div>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
         </div>
     </section>
